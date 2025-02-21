@@ -1,5 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
+:root {
+    --bg-color: hsl(210, 20%, 95%);
+    --container-bg: white;
+    --text-color: hsl(210, 10%, 20%);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --footer-bg: hsl(210, 20%, 90%);
+}
+
+[data-theme="dark"] {
+    --bg-color: hsl(210, 10%, 15%);
+    --container-bg: hsl(210, 10%, 20%);
+    --text-color: hsl(210, 15%, 90%);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --footer-bg: hsl(210, 10%, 10%);
+}
+
 body {
     font-family: 'Inter', sans-serif;
     display: flex;
@@ -7,17 +23,20 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background-color: hsl(210, 20%, 95%);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
     text-align: center;
-    background-color: white;
+    background-color: var(--container-bg);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px var(--shadow-color);
     width: 100%;
     max-width: 600px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .button-group {
@@ -85,9 +104,9 @@ button:hover {
     opacity: 0;
     transform: translateX(100%) scale(0.7);
     transition:
-        opacity 0.3s ease-out,
-        transform 0.3s ease-out,
-        background-color 0.3s ease;
+            opacity 0.3s ease-out,
+            transform 0.3s ease-out,
+            background-color 0.3s ease;
     min-width: 280px;
     max-width: 350px;
     word-wrap: break-word;
@@ -144,12 +163,31 @@ button:hover {
     background-color: hsl(210, 100%, 50%);
 }
 
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: hsl(210, 20%, 90%);
-    width: 100%;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+#theme-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px var(--shadow-color);
+}
+
+#theme-toggle:focus {
+    outline: none;
 }
 
 footer {
@@ -158,9 +196,10 @@ footer {
     left: 0;
     text-align: center;
     padding: 10px;
-    background-color: hsl(210, 20%, 90%);
+    background-color: var(--footer-bg);
     width: 100%;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 4px var(--shadow-color);
+    transition: background-color 0.3s ease;
 }
 
 @keyframes progressBar {
@@ -201,42 +240,42 @@ footer {
         width: 100%;
         max-width: 90%;
         margin: 0 auto;
-
-        button {
-            padding: 8px 16px;
-            font-size: 14px;
-        }
-
-        .button-group {
-            flex-direction: row;
-            gap: 8px;
-            justify-content: center;
-        }
     }
 
-    @media (max-width: 480px) {
-        body {
-            flex-direction: column;
-            padding: 10px;
-        }
+    button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 400px;
-            padding: 15px;
-            margin: 0 auto;
-        }
+    .button-group {
+        flex-direction: row;
+        gap: 8px;
+        justify-content: center;
+    }
+}
 
-        .button-group {
-            flex-direction: column;
-            gap: 10px;
-            justify-content: center;
-        }
+@media (max-width: 480px) {
+    body {
+        flex-direction: column;
+        padding: 10px;
+    }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-        }
+    .container {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
     }
 }
